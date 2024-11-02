@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.10)
+project(DivisorsProject)
+
+set(CMAKE_CXX_STANDARD 11)
+
+# Dodaj bibliotekę DivisorsLib
+add_library(DivisorsLib DivisorsLib/Divisors.cpp)
+
+target_include_directories(DivisorsLib PUBLIC DivisorsLib)
+
+# Dodaj projekt DivisorsApp
+add_executable(DivisorsApp DivisorsApp/DivisorsApp.cpp)
+target_include_directories(DivisorsApp PRIVATE DivisorsLib benchmark)
+target_link_libraries(DivisorsApp DivisorsLib)
+
+# Dodaj projekt DivisorsUnitTest
+add_executable(DivisorsUnitTest DivisorsUnitTest/DivisorsUnitTest.cpp)
+target_include_directories(DivisorsUnitTest PRIVATE DivisorsLib)
+target_link_libraries(DivisorsUnitTest DivisorsLib)
